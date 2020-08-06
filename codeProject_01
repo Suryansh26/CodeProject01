@@ -1,0 +1,193 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+var = pd.read_csv(r"C:\Users\prashant\Desktop\StudentsPerformance.csv")
+
+
+var.head()
+
+
+var.info()
+
+
+var.shape
+
+
+var.isnull().sum()
+
+
+plt.rcParams['figure.figsize'] = (20, 10)
+sns.countplot(var['math score'], palette = 'dark')
+plt.title("math marks score",fontsize = 20)
+plt.show()
+plt.rcParams['figure.figsize'] = (20, 10)
+sns.countplot(var['writing score'], palette = 'prism')
+plt.title("writing marks score",fontsize = 20)
+plt.show()
+plt.rcParams['figure.figsize'] = (20, 10)
+sns.countplot(var['reading score'], palette = 'bright')
+plt.title("reading marks score",fontsize = 20)
+plt.show()
+
+
+
+
+plt.figure(figsize=(15,5))
+plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.9,
+                   wspace=0.5, hspace=0.2)
+plt.subplot(131)
+plt.title("math marks score")
+sns.violinplot(y='math score',data=var,color='y',linewidth=2)
+plt.subplot(132)
+plt.title("reading marks score")
+sns.violinplot(y='reading score',data=var,color='c',linewidth=2)
+plt.subplot(133)
+plt.title("writing marks score")
+sns.violinplot(y='writing score',data=var,color='b',linewidth=2)
+plt.show()
+
+
+
+
+
+plt.figure(figsize=(20,10))
+plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.9,
+                   wspace=0.5, hspace=0.2)
+plt.subplot(141)
+plt.title("gender",fontsize = 20)
+var['gender'].value_counts().plot.pie(autopct="%1.1f%%")
+
+plt.subplot(142)
+plt.title("ethnicity",fontsize = 20)
+var['race/ethnicity'].value_counts().plot.pie(autopct="%1.1f%%")
+
+plt.subplot(143)
+plt.title("lunch",fontsize = 20)
+var['lunch'].value_counts().plot.pie(autopct="%1.1f%%")
+
+plt.show()
+
+
+
+
+
+plt.figure(figsize=(15,5))
+plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.9,
+                   wspace=0.5, hspace=0.2)
+plt.subplot(141)
+plt.title("math marks score")
+sns.barplot(x='gender', y='math score', data=var)
+plt.subplot(142)
+plt.title("reading marks score")
+sns.barplot(x='gender', y='reading score', data=var)
+plt.subplot(143)
+plt.title("writing marks score")
+sns.barplot(x='gender', y='writing score', data=var)
+plt.show()
+
+
+
+
+
+
+
+
+
+plt.figure(figsize=(40,20))
+plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.9,
+                   wspace=0.5, hspace=0.2)
+plt.subplot(251)
+plt.title("lunch vs Gender",fontsize = 15)
+sns.countplot(hue="gender", x='lunch', data=var)
+
+plt.subplot(252)
+plt.title("ethinicity and lunch",fontsize = 15)
+sns.countplot(hue="lunch", x='race/ethnicity', data=var)
+
+plt.show()
+
+
+
+pr=pd.crosstab(var['race/ethnicity'],var['parental level of education'],normalize=0)
+pr.plot.bar(stacked=True)
+plt.title('ethinicity Vs parental level of education',fontsize = 20)
+plt.show()
+
+
+
+
+
+plt.figure(figsize=(20,5))
+plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.9,
+                   wspace=0.5, hspace=0.2)
+
+plt.title('race Vs parental level of education',fontsize = 20)
+sns.countplot(x="parental level of education", hue="race/ethnicity", data=var)
+plt.show()
+
+plt.title("parental education Vs lunch",fontsize = 20)
+sns.countplot(hue="parental level of education", x='lunch', data=var)
+plt.show()
+
+
+
+
+
+plt.figure(figsize=(40,20))
+plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.9,
+                   wspace=0.5, hspace=0.2)
+plt.subplot(251)
+plt.title("test preperation course Vs Gender",fontsize = 15)
+sns.countplot(hue="test preparation course", y='gender', data=var)
+
+plt.subplot(254)
+plt.title("test preperation course Vs parental level of education",fontsize = 15)
+sns.countplot(hue="test preparation course", y='parental level of education', data=var)
+
+plt.subplot(253)
+plt.title("test preperation course Vs lunch",fontsize = 15)
+sns.countplot(hue="test preparation course", x='lunch', data=var)
+
+
+
+
+
+
+
+
+
+plt.subplot(252)
+plt.title("test preperation course Vs ethnicity",fontsize = 15)
+sns.countplot(hue="test preparation course", y='race/ethnicity', data=var)
+plt.show()
+
+plt.title('gender Vs ethnicity',fontsize = 20)
+sns.countplot(x="gender", hue="race/ethnicity", data=var)
+plt.show()
+plt.figure(figsize=(15,5))
+plt.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.9,
+                   wspace=0.5, hspace=0.2)
+
+
+
+
+
+
+
+
+
+plt.subplot(141)
+plt.title("math marks score depending on test preperation")
+sns.barplot(x='test preparation course', y='math score', data=var)
+plt.show()
+plt.subplot(121)
+plt.title("reading marks score depending on test preperation")
+sns.barplot(x='test preparation course', y='reading score', data=var)
+plt.show()
+plt.subplot(122)
+plt.title("writing marks score depending on test preperation")
+sns.barplot(x='test preparation course', y='writing score', data=var)
+plt.show()
